@@ -1,0 +1,23 @@
+﻿@model IEnumerable<MVCCoreDemo.Models.Category>
+
+@{
+	var categories = new List<MVCCoreDemo.Models.Category>()   
+	{
+		new Category(){ Name = "fridge", Price = 250
+	},
+	    new Category(){ Name = "Mobile",  Price = 200}
+	};
+}
+
+
+<ul>
+	
+		@foreach (var category in categories)
+		{
+			<li> @category.Name - @category.Price</li>
+		}
+	
+</ul>
+
+
+<a asp-controller="Home" asp-action="Index" class="text-decoration-none"> Back to Home</a>

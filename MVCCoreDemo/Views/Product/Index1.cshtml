@@ -1,0 +1,21 @@
+﻿
+<h2>Product Controller Index 2 Page</h2>
+
+<a asp-controller="Product" asp-action="Index">Back to Index Page</a>
+
+<h2>All Students</h2>
+
+@{
+	List<string> names = new List<string>()
+	{
+		"Sagar", "onkar", "Goldy"
+	};
+
+	<ul>
+		
+		@foreach(string name in names){
+			<li>@name</li>
+		}
+
+	</ul>
+}

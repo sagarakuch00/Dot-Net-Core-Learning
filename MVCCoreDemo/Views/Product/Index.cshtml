@@ -1,0 +1,14 @@
+﻿
+<h2>Tag helper class</h2>
+
+ using a tag :<a href="category/Index">Category</a><br />
+
+Using Html Helper class : @Html.ActionLink("Category","Index", "Category")<br />
+
+Using Tag helper class : <a asp-controller ="Category" asp-action="Index" asp-route-id="10">Category</a><br />
+
+<a asp-controller="Product" asp-action="Index1">Index1 page</a><br />
+
+<a asp-controller="Product" asp-action="Index2">Index2 page</a><br />
+
+<a asp-controller="Product" asp-action="Index3">Index3 page</a>
