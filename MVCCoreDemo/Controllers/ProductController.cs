@@ -3,10 +3,11 @@ using MVCCoreDemo.Models;
 
 namespace MVCCoreDemo.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         public IActionResult Index()
         {
+            ViewBag.userName = LoggedInUser;
             return View();
         }
 

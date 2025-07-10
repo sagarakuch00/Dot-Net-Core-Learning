@@ -3,7 +3,7 @@
 namespace MVCCoreDemo.Controllers
 {
     [Route("[controller]")]
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         //[HttpGet]
         //[Route("Category/Index")]

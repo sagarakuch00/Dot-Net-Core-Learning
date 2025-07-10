@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Products>
+
+@* <h1> Products View Components </h1> *@
+
+<h2>@Model.FirstOrDefault()?.Description.ToUpper()</h2>
+
+<table class="table table-bordered col-6">
+	@foreach (Products products in Model)
+	{
+		<tr>
+			<td>Name : @products.Name</td>
+			<td>Starting from : @products.Price</td>
+		</tr>
+	}
+</table>

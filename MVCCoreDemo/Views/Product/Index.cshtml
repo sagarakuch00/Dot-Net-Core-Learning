@@ -1,14 +1,35 @@
 ﻿
-<h2>Tag helper class</h2>
+<h2 highlight ="yellow">Tag helper class</h2>
 
- using a tag :<a href="category/Index">Category</a><br />
+<span Highlight="skyblue"> using a tag :</span><a href="category/Index">Category</a><br />
 
-Using Html Helper class : @Html.ActionLink("Category","Index", "Category")<br />
+<span Highlight="lightgreen">Using Html Helper class :</span> @Html.ActionLink("Category", "Index", "Category")
+<br />
 
-Using Tag helper class : <a asp-controller ="Category" asp-action="Index" asp-route-id="10">Category</a><br />
+<span>Using Tag helper class :</span> <a asp-controller="Category" asp-action="Index" asp-route-id="10">Category</a>
+<br />
 
 <a asp-controller="Product" asp-action="Index1">Index1 page</a><br />
 
 <a asp-controller="Product" asp-action="Index2">Index2 page</a><br />
 
 <a asp-controller="Product" asp-action="Index3">Index3 page</a>
+
+
+<my-button type="submit" value="My custom submit button"> </my-button>
+<my-button type="button" value="My custom normal button"> </my-button>
+
+
+<h2>Rendering Partial View</h2>
+
+@* @await Component.InvokeAsync("Product") *@
+
+<div class="row">
+	<div class="col-6">
+		@await Component.InvokeAsync("Product", new{description = "Top Rated"})
+	</div>
+
+	<div class="col-6">
+		@await Component.InvokeAsync("Product", new { description = "Discount Products" })
+	</div>
+</div>
