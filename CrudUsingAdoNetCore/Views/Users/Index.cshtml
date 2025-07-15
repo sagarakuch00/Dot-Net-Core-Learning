@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Users>
+
+
+<h1>Users List</h1>
+
+<a asp-controller="Users" asp-action="Create">Create new</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Date Of Birth</th>
+            <th>Added date</th>
+            <th>Modified Date</th>
+            <th>Deleted Date</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model != null && Model.Count() > 0)
+        {
+            foreach (Users user in Model)
+            {
+                <tr>
+                    <td><label>@user.Id</label></td>
+                    <td><label>@user.Name</label></td>
+                    <td><label>@user.Email</label></td>
+                    <td><label>@user.Age</label></td>
+                    <td><label>@user.DateOfBirth</label></td>
+                    <td><label>@user.AddedDate</label></td>
+                    <td><label>@user.ModifiedDate</label></td>
+                    <td><label>@user.DeletedDate</label></td>
+
+                    <td>
+                        <a asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Details</a> |
+                        <a asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
+                        <a asp-controller="Users" asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr class=" bg-info text-center">
+                <td colspan="8">
+                    NO Users Available
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
