@@ -9,10 +9,10 @@ namespace CrudUsingAdoNetCore.Controllers
         private readonly string _connectionString;
         private readonly IUserService _userService;
 
-        public UsersController(IConfiguration config, IUserService userSerVice)
+        public UsersController(IConfiguration config, IUserService userService)
         {
             _connectionString = config.GetConnectionString("B25ADONETCOREDB");
-            _userService = userSerVice;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -28,21 +28,24 @@ namespace CrudUsingAdoNetCore.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet] 
         public IActionResult Create()
         {
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Users model)
         {
+            model.AddedDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 if (_userService.Create(model))
                 {
                     return RedirectToAction("Index");
                 }
+
             }
             return View(model);
         }
@@ -95,7 +98,8 @@ namespace CrudUsingAdoNetCore.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            Users user = GetUserById(id ?? 0);
+            //Users user = GetUserById(id ?? 0);
+            Users user = _userService.GetById(id ?? 0); 
             return View(user);
         }
 
@@ -115,7 +119,8 @@ namespace CrudUsingAdoNetCore.Controllers
         [HttpGet]
         public IActionResult Delete(int? id)
         {
-            Users user = GetUserById(id ?? 0);
+            //Users user = GetUserById(id ?? 0);
+            Users user = _userService.GetById(id ?? 0);
             return View(user);
         }
 
@@ -131,7 +136,6 @@ namespace CrudUsingAdoNetCore.Controllers
             Users user = GetUserById(Id ?? 0);
              return View(user);
         }
-
 
     }
 }

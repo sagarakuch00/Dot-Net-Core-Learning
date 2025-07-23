@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<Users>
 
-
 <h1>Users List</h1>
 
 <a asp-controller="Users" asp-action="Create">Create new</a>
 
-<table>
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>id</th>
@@ -30,7 +29,7 @@
                     <td><label>@user.Name</label></td>
                     <td><label>@user.Email</label></td>
                     <td><label>@user.Age</label></td>
-                    <td><label>@user.DateOfBirth</label></td>
+                    <td>@Html.DisplayFor(modelItem => user.DateOfBirth)</td>
                     <td><label>@user.AddedDate</label></td>
                     <td><label>@user.ModifiedDate</label></td>
                     <td><label>@user.DeletedDate</label></td>
