@@ -2,6 +2,7 @@
 using CRUDUsingEFCoreCodeFirst.Models;
 using EFCoreCodeFirst.Models;
 using EFCoreCodeFirst.Models.Entities;
+using EFCoreCodeFirst.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,16 +12,26 @@ namespace EFCoreCodeFirst.Controllers
     {
         private readonly ProductDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IMyService _myService;
+        private readonly IMyService _myService1;
 
-        public UsersController(ProductDbContext dbContext, IMapper mapper)
+
+        public UsersController(ProductDbContext dbContext, IMapper mapper,
+            IMyService myService, IMyService myService1)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _myService = myService;
+            _myService1 = myService1;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+
+            ViewBag.InstanceCount = _myService.InstanceCount;
+            ViewBag.InstanceCount1 = _myService1.InstanceCount;
+
             var users = _dbContext.Users.ToList();
 
             var usersViewModel = _mapper.Map<List<UserViewModel>>(users); 

@@ -1,5 +1,6 @@
 ﻿using CRUDUsingEFCoreCodeFirst.Models;
 using CRUDUsingEFCoreCodeFirst.Models.Entities;
+using EFCoreCodeFirst.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,15 +10,19 @@ namespace EFCoreCodeFirst.Controllers
     public class CategoryController : Controller
     {
         private readonly ProductDbContext _dbContext;
-
-        public CategoryController(ProductDbContext dbContext)
+        private readonly IMyService _myService;
+        
+        public CategoryController(ProductDbContext dbContext, IMyService myService)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext; 
+            _myService = myService;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.InstanceCount = _myService.InstanceCount;
+
             var categories = _dbContext.Categories.ToList();
             return View(categories);
         }

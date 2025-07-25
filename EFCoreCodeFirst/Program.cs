@@ -1,6 +1,7 @@
 using AutoMapper;
 using CRUDUsingEFCoreCodeFirst.Models;
 using EFCoreCodeFirst.Profiles;
+using EFCoreCodeFirst.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,14 @@ builder.Services.AddDbContext<ProductDbContext>(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(Program));
+
+//builder.Services.AddSingleton<IMyService, MyService>();
+
+//builder.Services.AddScoped<IMyService, MyService>();
+
+builder.Services.AddTransient<IMyService, MyService>();
+
+
 
 
 var app = builder.Build();
