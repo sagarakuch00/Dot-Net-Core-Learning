@@ -1,4 +1,6 @@
+using AutoMapper;
 using CRUDUsingEFCoreCodeFirst.Models;
+using EFCoreCodeFirst.Profiles;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<ProductDbContext>(options =>
     //        sqlOptions.CommandTimeout(120); // 120 seconds command TimeOut
     //    });
 });
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 
 var app = builder.Build();

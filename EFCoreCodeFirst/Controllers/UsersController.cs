@@ -1,4 +1,6 @@
-﻿using CRUDUsingEFCoreCodeFirst.Models;
+﻿using AutoMapper;
+using CRUDUsingEFCoreCodeFirst.Models;
+using EFCoreCodeFirst.Models;
 using EFCoreCodeFirst.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,17 +10,22 @@ namespace EFCoreCodeFirst.Controllers
     public class UsersController : Controller
     {
         private readonly ProductDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public UsersController(ProductDbContext dbContext)
+        public UsersController(ProductDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
             var users = _dbContext.Users.ToList();
-            return View(users);
+
+            var usersViewModel = _mapper.Map<List<UserViewModel>>(users); 
+            // User and View expecting UserViewModel
+            return View(usersViewModel);
         }
 
         [HttpGet]
@@ -28,11 +35,12 @@ namespace EFCoreCodeFirst.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(User user)
+        public IActionResult Create(UserViewModel user)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Users.Add(user);
+                var dbUser = _mapper.Map<User>(user); // from userViewModel to User
+                _dbContext.Users.Add(dbUser);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
