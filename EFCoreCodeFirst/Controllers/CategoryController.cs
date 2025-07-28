@@ -1,5 +1,6 @@
 ﻿using CRUDUsingEFCoreCodeFirst.Models;
 using CRUDUsingEFCoreCodeFirst.Models.Entities;
+using EFCoreCodeFirst.customFilters;
 using EFCoreCodeFirst.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,6 +20,11 @@ namespace EFCoreCodeFirst.Controllers
         }
 
         [HttpGet]
+        [ServiceFilter(typeof(MyResourceFilter))]
+        [ServiceFilter(typeof(MyAuthorizationFilter))]
+        [ServiceFilter(typeof(MyActionFilter))]
+        [ServiceFilter(typeof(MyResultFilter))]
+        [ServiceFilter(typeof(MyExceptionFilter))]
         public IActionResult Index()
         {
             ViewBag.InstanceCount = _myService.InstanceCount;

@@ -1,5 +1,6 @@
 using AutoMapper;
 using CRUDUsingEFCoreCodeFirst.Models;
+using EFCoreCodeFirst.customFilters;
 using EFCoreCodeFirst.Profiles;
 using EFCoreCodeFirst.Services;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +8,10 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(new MyResourceFilter()); // Applied Resource filter globally
+});
 
 builder.Services.AddDbContext<ProductDbContext>(options =>
 {
@@ -25,11 +29,15 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 //builder.Services.AddSingleton<IMyService, MyService>();
 
-//builder.Services.AddScoped<IMyService, MyService>();
+builder.Services.AddScoped<IMyService, MyService>();
 
-builder.Services.AddTransient<IMyService, MyService>();
+//builder.Services.AddTransient<IMyService, MyService>();
 
-
+//builder.Services.AddScoped<MyResourceFilter>();
+builder.Services.AddScoped<MyAuthorizationFilter>();
+builder.Services.AddScoped<MyActionFilter>();
+builder.Services.AddScoped<MyResultFilter>();
+builder.Services.AddScoped<MyExceptionFilter>();
 
 
 var app = builder.Build();
